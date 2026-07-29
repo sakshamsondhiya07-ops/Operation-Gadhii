@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Gadhii 🎀💞</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+            color: #333;
+        }
+
+        /* Lock Screen */
+        #lock-screen {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            text-align: center;
+            max-width: 350px;
+            width: 90%;
+        }
+
+        #lock-screen h2 {
+            color: #ff4757;
+            margin-bottom: 15px;
+        }
+
+        #lock-screen input {
+            width: 100%;
+            padding: 12px;
+            margin: 15px 0;
+            border: 2px solid #ff6b81;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 16px;
+            outline: none;
+        }
+
+        #lock-screen button, .btn {
+            background: #ff4757;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 5px 15px rgba(255, 71, 87, 0.4);
+        }
+
+        #lock-screen button:hover, .btn:hover {
+            background: #ff6b81;
+            transform: scale(1.05);
+        }
+
+        #error-msg {
+            color: red;
+            margin-top: 10px;
+            display: none;
+            font-size: 14px;
+        }
+
+        /* Main Birthday Content */
+        #main-content {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 600px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #d63031;
+            margin-bottom: 20px;
+            font-size: 28px;
+            text-shadow: 1px 1px 2px white;
+        }
+
+        /* Photo Gallery / Slider */
+        .gallery-container {
+            width: 100%;
+            position: relative;
+            margin: 20px 0;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            background: white;
+            padding: 10px;
+        }
+
+        .slide {
+            display: none;
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .active-slide {
+            display: block;
+            animation: fadeIn 0.8s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        /* Letter Box */
+        .letter-box {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            margin-top: 20px;
+            text-align: left;
+            line-height: 1.6;
+            font-size: 16px;
+            color: #444;
+            border-left: 5px solid #ff4757;
+            position: relative;
+        }
+
+        .letter-box h3 {
+            color: #ff4757;
+            margin-bottom: 10px;
+        }
+
+        /* Music Controls */
+        .music-btn {
+            margin-bottom: 15px;
+            background: #2ed573;
+            box-shadow: 0 5px 15px rgba(46, 213, 115, 0.4);
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Lock Screen -->
+    <div id="lock-screen">
+        <h2>🔒 Surprise Lock</h2>
+        <p>Aage badhne ke liye secret password daalo 🤫</p>
+        <input type="password" id="passwordInput" placeholder="Enter Password...">
+        <button onclick="checkPassword()">Unlock ✨</button>
+        <p id="error-msg">Galat password! Dobara try karo 😜</p>
+    </div>
+
+    <!-- Main Content -->
+    <div id="main-content">
+        <h1>Happy Birthday Gadhii 🎀💞</h1>
+
+        <button class="btn music-btn" onclick="toggleMusic()">🎵 Play/Pause Birthday Song</button>
+        <audio id="bgMusic" loop>
+            <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mp3">
+        </audio>
+
+        <!-- 5 Photos Slider -->
+        <div class="gallery-container">
+            <!-- Yahan apni photos ke links ya filenames daalein -->
+            <img class="slide active-slide" src="photo1.jpg" alt="Photo 1">
+            <img class="slide" src="photo2.jpg" alt="Photo 2">
+            <img class="slide" src="photo3.jpg" alt="Photo 3">
+            <img class="slide" src="photo4.jpg" alt="Photo 4">
+            <img class="slide" src="photo5.jpg" alt="Photo 5">
+        </div>
+
+        <!-- Birthday Letter -->
+        <div class="letter-box">
+            <h3>Pyaar Bhara Letter 💌</h3>
+            <p id="letter-text">
+                <!-- APNA LETTER YAHAN LIKHEIN -->
+                Dear Gadhii 🎀,<br><br>
+                Aapko Janamdin Ki Bahut Bahut Badhaiyan! 🎂✨<br>
+                Aap meri life ki sabse special aur pyaari dost ho. Hamesha aise hi muskurati raho aur mujhe pareshan karti raho! 💖<br><br>
+                Have a wonderful year ahead! 🚀
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // Password Check
+        function checkPassword() {
+            const password = document.getElementById('passwordInput').value;
+            if (password === "Oyee..") {
+                document.getElementById('lock-screen').style.display = "none";
+                document.getElementById('main-content').style.display = "flex";
+                startPhotoSlider();
+            } else {
+                document.getElementById('error-msg').style.display = "block";
+            }
+        }
+
+        // Photo Slider Logic (Automatic)
+        function startPhotoSlider() {
+            let slides = document.querySelectorAll('.slide');
+            let currentSlide = 0;
+
+            setInterval(() => {
+                slides[currentSlide].classList.remove('active-slide');
+                currentSlide = (currentSlide + 1) % slides.length;
+                slides[currentSlide].classList.add('active-slide');
+            }, 3000); // Har 3 second me photo badlegi
+        }
+
+        // Music Control
+        function toggleMusic() {
+            let music = document.getElementById('bgMusic');
+            if (music.paused) {
+                music.play();
+            } else {
+                music.pause();
+            }
+        }
+    </script>
+</body>
+</html>
