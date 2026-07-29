@@ -20,17 +20,18 @@
             align-items: center;
             overflow-x: hidden;
             color: #333;
+            padding: 15px;
         }
 
         /* Lock Screen */
         #lock-screen {
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.95);
             padding: 30px;
             border-radius: 20px;
             box-shadow: 0 10px 25px rgba(0,0,0,0.15);
             text-align: center;
             max-width: 350px;
-            width: 90%;
+            width: 100%;
         }
 
         #lock-screen h2 {
@@ -67,10 +68,11 @@
         }
 
         #error-msg {
-            color: red;
+            color: #ff4757;
             margin-top: 10px;
             display: none;
             font-size: 14px;
+            font-weight: bold;
         }
 
         /* Main Birthday Content */
@@ -80,14 +82,13 @@
             align-items: center;
             width: 100%;
             max-width: 600px;
-            padding: 20px;
             text-align: center;
         }
 
         h1 {
             color: #d63031;
             margin-bottom: 20px;
-            font-size: 28px;
+            font-size: 26px;
             text-shadow: 1px 1px 2px white;
         }
 
@@ -95,10 +96,10 @@
         .gallery-container {
             width: 100%;
             position: relative;
-            margin: 20px 0;
+            margin: 15px 0;
             border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
             background: white;
             padding: 10px;
         }
@@ -127,21 +128,22 @@
             padding: 25px;
             border-radius: 15px;
             box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-            margin-top: 20px;
+            margin-top: 15px;
             text-align: left;
-            line-height: 1.6;
-            font-size: 16px;
+            line-height: 1.7;
+            font-size: 15px;
             color: #444;
             border-left: 5px solid #ff4757;
             position: relative;
+            width: 100%;
         }
 
         .letter-box h3 {
             color: #ff4757;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
+            font-size: 20px;
         }
 
-        /* Music Controls */
         .music-btn {
             margin-bottom: 15px;
             background: #2ed573;
@@ -154,8 +156,8 @@
 
     <!-- Lock Screen -->
     <div id="lock-screen">
-        <h2>🔒 Surprise Lock</h2>
-        <p>Aage badhne ke liye secret password daalo 🤫</p>
+        <h2>🔒 Secret Lock</h2>
+        <p>Password dalo tabhi aage ka surprise dikhega 🤫</p>
         <input type="password" id="passwordInput" placeholder="Enter Password...">
         <button onclick="checkPassword()">Unlock ✨</button>
         <p id="error-msg">Galat password! Dobara try karo 😜</p>
@@ -163,32 +165,33 @@
 
     <!-- Main Content -->
     <div id="main-content">
-        <h1>Happy Birthday Gadhii 🎀💞</h1>
+        <h1>Happy Birthday Gadhii! 🌸🥳</h1>
 
-        <button class="btn music-btn" onclick="toggleMusic()">🎵 Play/Pause Birthday Song</button>
+        <button class="btn music-btn" onclick="toggleMusic()">🎵 Play / Pause Background Music</button>
         <audio id="bgMusic" loop>
             <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mp3">
         </audio>
 
         <!-- 5 Photos Slider -->
         <div class="gallery-container">
-            <!-- Yahan apni photos ke links ya filenames daalein -->
-            <img class="slide active-slide" src="photo1.jpg" alt="Photo 1">
-            <img class="slide" src="photo2.jpg" alt="Photo 2">
-            <img class="slide" src="photo3.jpg" alt="Photo 3">
-            <img class="slide" src="photo4.jpg" alt="Photo 4">
-            <img class="slide" src="photo5.jpg" alt="Photo 5">
+            <img class="slide active-slide" src="1.jpg" alt="Photo 1">
+            <img class="slide" src="2.jpg" alt="Photo 2">
+            <img class="slide" src="3.jpg" alt="Photo 3">
+            <img class="slide" src="4.jpg" alt="Photo 4">
+            <img class="slide" src="5.jpg" alt="Photo 5">
         </div>
 
         <!-- Birthday Letter -->
         <div class="letter-box">
             <h3>Pyaar Bhara Letter 💌</h3>
             <p id="letter-text">
-                <!-- APNA LETTER YAHAN LIKHEIN -->
-                Dear Gadhii 🎀,<br><br>
-                Aapko Janamdin Ki Bahut Bahut Badhaiyan! 🎂✨<br>
-                Aap meri life ki sabse special aur pyaari dost ho. Hamesha aise hi muskurati raho aur mujhe pareshan karti raho! 💖<br><br>
-                Have a wonderful year ahead! 🚀
+                Happy Birthday, Gadhii! 🌸🥳<br><br>
+                Today is a very special day because it is your birthday. I just want to say that always stay happy, keep smiling, and may all your dreams come true. ❤️<br><br>
+                You are one of those people with whom talking makes my heart feel lighter. Sometimes laughter, sometimes fun, sometimes random silly talks… every moment spent with you will always be memorable. And yes, you are one of those people whom I can call even at 2 AM. 😄<br><br>
+                No matter how many problems come in life, always remember that I will be there for you. Whenever you need anything, just message or call me without thinking twice.<br><br>
+                Waise meri English bhi itni buri nahi hai... thodi bahut mujhe bhi aati hai. 🥰😎<br><br>
+                Aur haan... itna bhi khush mat ho jana, thodi jhoothi tareef bhi ki hai. 😌😂<br><br>
+                Happy Birthday once again, Gadhii! 💞🎀
             </p>
         </div>
     </div>
@@ -206,7 +209,7 @@
             }
         }
 
-        // Photo Slider Logic (Automatic)
+        // Automatic Photo Slider
         function startPhotoSlider() {
             let slides = document.querySelectorAll('.slide');
             let currentSlide = 0;
@@ -215,10 +218,10 @@
                 slides[currentSlide].classList.remove('active-slide');
                 currentSlide = (currentSlide + 1) % slides.length;
                 slides[currentSlide].classList.add('active-slide');
-            }, 3000); // Har 3 second me photo badlegi
+            }, 3000); // Har 3 second me photo change hogi
         }
 
-        // Music Control
+        // Music Play/Pause
         function toggleMusic() {
             let music = document.getElementById('bgMusic');
             if (music.paused) {
