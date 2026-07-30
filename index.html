@@ -13,203 +13,343 @@
         }
 
         body {
-            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
+            background-color: #0b0c10;
+            color: #fff;
             min-height: 100vh;
             display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: flex-start;
             overflow-x: hidden;
-            color: #333;
-            padding: 15px;
+            padding: 15px 0 40px 0;
         }
 
-        /* Lock Screen */
-        #lock-screen {
-            background: rgba(255, 255, 255, 0.95);
-            padding: 30px;
-            border-radius: 20px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        /* Top Lights Header */
+        .fairy-lights {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 25px;
+            display: flex;
+            justify-content: space-around;
+            z-index: 100;
+            opacity: 0.3;
+            transition: opacity 1s ease;
+        }
+
+        .light-bulb {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #fff;
+            box-shadow: 0 0 10px #fffa65, 0 0 20px #fffa65;
+            animation: glow 1.5s infinite alternate;
+        }
+
+        @keyframes glow {
+            from { opacity: 0.4; }
+            to { opacity: 1; box-shadow: 0 0 15px #ff4757, 0 0 25px #ff4757; }
+        }
+
+        /* Container for Phone Scroll */
+        .wrapper {
+            width: 90%;
+            max-width: 400px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            z-index: 10;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            padding: 22px 18px;
+            border-radius: 18px;
             text-align: center;
-            max-width: 350px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
             width: 100%;
         }
 
-        #lock-screen h2 {
-            color: #ff4757;
-            margin-bottom: 15px;
+        h2, h3 {
+            margin-bottom: 12px;
+            font-weight: 600;
+            color: #fff;
+            font-size: 20px;
         }
 
-        #lock-screen input {
+        p {
+            font-size: 14px;
+            color: #dddddd;
+            line-height: 1.6;
+        }
+
+        input {
             width: 100%;
             padding: 12px;
             margin: 15px 0;
-            border: 2px solid #ff6b81;
-            border-radius: 10px;
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 25px;
             text-align: center;
-            font-size: 16px;
+            background: rgba(0,0,0,0.4);
+            color: #fff;
+            font-size: 15px;
             outline: none;
         }
 
-        #lock-screen button, .btn {
+        .btn {
             background: #ff4757;
-            color: white;
+            color: #fff;
             border: none;
             padding: 12px 25px;
-            border-radius: 25px;
-            font-size: 16px;
-            cursor: pointer;
-            transition: 0.3s;
-            box-shadow: 0 5px 15px rgba(255, 71, 87, 0.4);
-        }
-
-        #lock-screen button:hover, .btn:hover {
-            background: #ff6b81;
-            transform: scale(1.05);
-        }
-
-        #error-msg {
-            color: #ff4757;
-            margin-top: 10px;
-            display: none;
+            border-radius: 30px;
             font-size: 14px;
             font-weight: bold;
-        }
-
-        /* Main Birthday Content */
-        #main-content {
-            display: none;
-            flex-direction: column;
-            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 0 15px rgba(255, 71, 87, 0.5);
+            transition: 0.3s ease;
             width: 100%;
-            max-width: 600px;
-            text-align: center;
         }
 
-        h1 {
-            color: #d63031;
-            margin-bottom: 20px;
-            font-size: 26px;
-            text-shadow: 1px 1px 2px white;
+        .btn:active {
+            transform: scale(0.97);
         }
 
-        /* Photo Gallery / Slider */
+        /* Floating Balloons */
+        .balloon-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 2;
+        }
+
+        .balloon {
+            position: absolute;
+            bottom: -100px;
+            width: 35px;
+            height: 45px;
+            border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
+            animation: floatUp 6s linear infinite;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0) rotate(0deg); opacity: 0.9; }
+            100% { transform: translateY(-110vh) rotate(20deg); opacity: 0; }
+        }
+
+        /* Photo & Screenshot Display */
+        .img-box {
+            width: 100%;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-top: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .img-box img {
+            width: 100%;
+            display: block;
+            border-radius: 12px;
+            object-fit: cover;
+        }
+
         .gallery-container {
             width: 100%;
-            position: relative;
-            margin: 15px 0;
-            border-radius: 15px;
+            height: 320px;
+            border-radius: 12px;
             overflow: hidden;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
-            background: white;
-            padding: 10px;
+            position: relative;
+            margin-top: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         .slide {
-            display: none;
             width: 100%;
-            height: 350px;
+            height: 100%;
             object-fit: cover;
-            border-radius: 10px;
+            display: none;
         }
 
         .active-slide {
             display: block;
-            animation: fadeIn 0.8s ease-in-out;
+            animation: fadeIn 0.8s ease;
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: scale(0.95); }
-            to { opacity: 1; transform: scale(1); }
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
-        /* Letter Box */
-        .letter-box {
-            background: white;
-            padding: 25px;
-            border-radius: 15px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-            margin-top: 15px;
+        .letter-text {
             text-align: left;
-            line-height: 1.7;
-            font-size: 15px;
-            color: #444;
-            border-left: 5px solid #ff4757;
-            position: relative;
-            width: 100%;
+            background: rgba(0, 0, 0, 0.25);
+            padding: 15px;
+            border-radius: 12px;
+            border-left: 4px solid #ff4757;
+            margin-top: 10px;
         }
 
-        .letter-box h3 {
-            color: #ff4757;
-            margin-bottom: 12px;
-            font-size: 20px;
+        #error-msg {
+            color: #ff6b81;
+            font-size: 13px;
+            margin-top: 10px;
+            display: none;
         }
-
-        .music-btn {
-            margin-bottom: 15px;
-            background: #2ed573;
-            box-shadow: 0 5px 15px rgba(46, 213, 115, 0.4);
-        }
-
     </style>
 </head>
 <body>
 
-    <!-- Lock Screen -->
-    <div id="lock-screen">
-        <h2>🔒 Secret Lock</h2>
-        <p>Password dalo tabhi aage ka surprise dikhega 🤫</p>
-        <input type="password" id="passwordInput" placeholder="Enter Password...">
-        <button onclick="checkPassword()">Unlock ✨</button>
-        <p id="error-msg">Galat password! Dobara try karo 😜</p>
+    <!-- Fairy Lights Header -->
+    <div class="fairy-lights" id="fairyLights">
+        <div class="light-bulb"></div>
+        <div class="light-bulb"></div>
+        <div class="light-bulb"></div>
+        <div class="light-bulb"></div>
+        <div class="light-bulb"></div>
     </div>
 
-    <!-- Main Content -->
-    <div id="main-content">
-        <h1>Happy Birthday Gadhii! 🌸🥳</h1>
+    <!-- Floating Balloons Layer -->
+    <div class="balloon-container" id="balloonContainer"></div>
 
-        <button class="btn music-btn" onclick="toggleMusic()">🎵 Play / Pause Background Music</button>
-        <audio id="bgMusic" loop>
-            <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mp3">
-        </audio>
+    <!-- Background Music -->
+    <audio id="bgMusic" loop>
+        <source src="song.mp3" type="audio/mp3">
+    </audio>
 
-        <!-- 5 Photos Slider -->
-        <div class="gallery-container">
-            <img class="slide active-slide" src="1.jpg" alt="Photo 1">
-            <img class="slide" src="2.jpg" alt="Photo 2">
-            <img class="slide" src="3.jpg" alt="Photo 3">
-            <img class="slide" src="4.jpg" alt="Photo 4">
-            <img class="slide" src="5.jpg" alt="Photo 5">
+    <div class="wrapper">
+
+        <!-- STEP 0: Lock Screen -->
+        <div class="card" id="step-lock">
+            <h2>🔒 Secret Lock</h2>
+            <p>Password dalo tabhi aage ka surprise dikhega 🤫</p>
+            <input type="password" id="passwordInput" placeholder="Enter Password...">
+            <button class="btn" onclick="checkPassword()">Unlock ✨</button>
+            <p id="error-msg">Galat password! Dobara try karo 😜</p>
         </div>
 
-        <!-- Birthday Letter -->
-        <div class="letter-box">
-            <h3>Pyaar Bhara Letter 💌</h3>
-            <p id="letter-text">
-                Happy Birthday, Gadhii! 🌸🥳<br><br>
-                Today is a very special day because it is your birthday. I just want to say that always stay happy, keep smiling, and may all your dreams come true. ❤️<br><br>
-                You are one of those people with whom talking makes my heart feel lighter. Sometimes laughter, sometimes fun, sometimes random silly talks… every moment spent with you will always be memorable. And yes, you are one of those people whom I can call even at 2 AM. 😄<br><br>
-                No matter how many problems come in life, always remember that I will be there for you. Whenever you need anything, just message or call me without thinking twice.<br><br>
-                Waise meri English bhi itni buri nahi hai... thodi bahut mujhe bhi aati hai. 🥰😎<br><br>
-                Aur haan... itna bhi khush mat ho jana, thodi jhoothi tareef bhi ki hai. 😌😂<br><br>
-                Happy Birthday once again, Gadhii! 💞🎀
-            </p>
+        <!-- Main Scrollable Content Area -->
+        <div id="main-content" style="display: none; flex-direction: column; gap: 20px;">
+
+            <!-- Ambient Controls -->
+            <div class="card">
+                <h2>The Stage is Set ✨</h2>
+                <p style="margin-bottom: 12px;">Pehle lights aur music on kar lo!</p>
+                <button class="btn" id="lightBtn" onclick="turnOnLights()" style="margin-bottom: 10px;">💡 TURN ON LIGHTS</button>
+                <button class="btn" id="musicBtn" onclick="toggleMusic()" style="background: #2ed573;">🎵 PLAY MUSIC</button>
+            </div>
+
+            <!-- First Conversation Section -->
+            <div class="card">
+                <h2>Where It All Started 💬</h2>
+                <p>Mujhe aaj bhi yaad hai jab tumse pehli baar baat hui thi... ❤️</p>
+                <!-- First Chat Screenshot Image -->
+                <div class="img-box">
+                    <img src="chat.jpg" alt="Pehli Baat Ka Screenshot">
+                </div>
+            </div>
+
+            <!-- Photos Section (2 Photos Only) -->
+            <div class="card">
+                <h2>Our Memories 📸</h2>
+                <div class="gallery-container">
+                    <img class="slide active-slide" src="1.jpg" alt="Photo 1">
+                    <img class="slide" src="2.jpg" alt="Photo 2">
+                </div>
+            </div>
+
+            <!-- Birthday Letter Section -->
+            <div class="card">
+                <h3>Pyaar Bhara Letter 💌</h3>
+                <div class="letter-text">
+                    <p>
+                        Happy Birthday, Gadhii! 🌸🥳<br><br>
+                        Today is a very special day because it is your birthday. Always stay happy, keep smiling, and may all your dreams come true. ❤️<br><br>
+                        You are one of those people with whom talking makes my heart feel lighter. Every moment spent with you is special. And yes, you are one of those people whom I can call even at 2 AM. 😄<br><br>
+                        Whenever you need anything, just message or call me without thinking twice.<br><br>
+                        Waise meri English bhi itni buri nahi hai... thodi bahut mujhe bhi aati hai. 🥰😎<br><br>
+                        Aur haan... itna bhi khush mat ho jana, thodi jhoothi tareef bhi ki hai. 😌😂<br><br>
+                        Happy Birthday once again, Gadhii! 💞🎀
+                    </p>
+                </div>
+            </div>
+
         </div>
+
     </div>
 
     <script>
+        // Audio Crop Settings (1:13 = 73 seconds, 1:29 = 89 seconds)
+        const startTime = 73; // Start time in seconds
+        const endTime = 89;   // End time in seconds
+
+        const music = document.getElementById('bgMusic');
+
+        // Continuous monitoring: Jab bhi song 1:29 (89s) tak pahunchega, waapas 1:13 (73s) par reset ho jayega
+        music.addEventListener('timeupdate', function() {
+            if (this.currentTime >= endTime) {
+                this.currentTime = startTime; 
+            }
+        });
+
         // Password Check
         function checkPassword() {
             const password = document.getElementById('passwordInput').value;
             if (password === "Oyee..") {
-                document.getElementById('lock-screen').style.display = "none";
+                document.getElementById('step-lock').style.display = "none";
                 document.getElementById('main-content').style.display = "flex";
+                createBalloons();
                 startPhotoSlider();
             } else {
                 document.getElementById('error-msg').style.display = "block";
             }
         }
 
-        // Automatic Photo Slider
+        // Lights Toggle
+        function turnOnLights() {
+            document.getElementById('fairyLights').style.opacity = "1";
+            document.body.style.background = "radial-gradient(circle, #1a1a2e 0%, #0f0f1a 100%)";
+            document.getElementById('lightBtn').innerText = "💡 LIGHTS ON!";
+        }
+
+        // Music Play/Pause Toggle
+        function toggleMusic() {
+            let btn = document.getElementById('musicBtn');
+            if (music.paused) {
+                // Agar song selected timing range ke bahar hai, toh use 1:13 par set kar do
+                if (music.currentTime < startTime || music.currentTime >= endTime) {
+                    music.currentTime = startTime;
+                }
+                music.play();
+                btn.innerText = "⏸️ PAUSE MUSIC";
+            } else {
+                music.pause();
+                btn.innerText = "🎵 PLAY MUSIC";
+            }
+        }
+
+        // Floating Balloons Generator
+        function createBalloons() {
+            const container = document.getElementById('balloonContainer');
+            const colors = ['#ff4757', '#74b9ff', '#ffeaa7', '#a29bfe', '#fd79a8'];
+            
+            for (let i = 0; i < 20; i++) {
+                let balloon = document.createElement('div');
+                balloon.className = 'balloon';
+                balloon.style.left = Math.random() * 100 + 'vw';
+                balloon.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                balloon.style.animationDuration = (Math.random() * 3 + 4) + 's';
+                balloon.style.animationDelay = (Math.random() * 2) + 's';
+                container.appendChild(balloon);
+            }
+        }
+
+        // Photo Slider (2 Photos)
         function startPhotoSlider() {
             let slides = document.querySelectorAll('.slide');
             let currentSlide = 0;
@@ -218,17 +358,7 @@
                 slides[currentSlide].classList.remove('active-slide');
                 currentSlide = (currentSlide + 1) % slides.length;
                 slides[currentSlide].classList.add('active-slide');
-            }, 3000); // Har 3 second me photo change hogi
-        }
-
-        // Music Play/Pause
-        function toggleMusic() {
-            let music = document.getElementById('bgMusic');
-            if (music.paused) {
-                music.play();
-            } else {
-                music.pause();
-            }
+            }, 3000);
         }
     </script>
 </body>
