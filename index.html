@@ -1,497 +1,435 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Birthday Gadhii 🎀💞</title>
+    <title>Happy Birthday Tamanna!</title>
     <style>
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Poppins', sans-serif;
+            box-sizing: border-box;
         }
 
-        body {
-            background-color: #0b0c10;
-            color: #fff;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            overflow-x: hidden;
-            padding: 15px 0 40px 0;
+        body, html {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-color: #000;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
-        /* Top Lights Header */
-        .fairy-lights {
-            position: fixed;
+        /* Lock Screen Styles */
+        #lock-screen {
+            position: absolute;
             top: 0;
             left: 0;
             width: 100%;
-            height: 25px;
-            display: flex;
-            justify-content: space-around;
-            z-index: 100;
-            opacity: 0.3;
-            transition: opacity 1s ease;
-        }
-
-        .light-bulb {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: #fff;
-            box-shadow: 0 0 10px #fffa65, 0 0 20px #fffa65;
-            animation: glow 1.5s infinite alternate;
-        }
-
-        @keyframes glow {
-            from { opacity: 0.4; }
-            to { opacity: 1; box-shadow: 0 0 15px #ff4757, 0 0 25px #ff4757; }
-        }
-
-        /* Container for Phone Scroll */
-        .wrapper {
-            width: 90%;
-            max-width: 400px;
-            margin: 0 auto;
+            height: 100%;
+            background: #050505;
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            justify-content: center;
+            align-items: center;
             z-index: 10;
+            transition: opacity 1s ease, visibility 1s;
         }
 
-        .card {
-            background: rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            padding: 22px 18px;
-            border-radius: 18px;
+        .lock-card {
+            background: #111;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(255, 43, 91, 0.3);
             text-align: center;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
-            width: 100%;
+            border: 1px solid #ff2b5b;
         }
 
-        h2, h3 {
-            margin-bottom: 12px;
-            font-weight: 600;
+        .lock-card h2 {
             color: #fff;
-            font-size: 20px;
+            margin-bottom: 20px;
+            font-size: 24px;
         }
 
-        p {
-            font-size: 14px;
-            color: #dddddd;
-            line-height: 1.6;
-        }
-
-        input {
-            width: 100%;
-            padding: 12px;
-            margin: 15px 0;
-            border: 1px solid rgba(255,255,255,0.2);
+        .lock-card input {
+            padding: 12px 20px;
             border-radius: 25px;
-            text-align: center;
-            background: rgba(0,0,0,0.4);
+            border: 2px solid #ff2b5b;
+            background: #222;
             color: #fff;
-            font-size: 15px;
+            font-size: 16px;
             outline: none;
+            text-align: center;
+            margin-bottom: 15px;
+            width: 80%;
         }
 
-        .btn {
-            background: #ff4757;
-            color: #fff;
+        .lock-card button {
+            padding: 10px 25px;
+            border-radius: 25px;
             border: none;
-            padding: 12px 25px;
-            border-radius: 30px;
-            font-size: 14px;
+            background: #ff2b5b;
+            color: #fff;
             font-weight: bold;
+            font-size: 16px;
             cursor: pointer;
-            box-shadow: 0 0 15px rgba(255, 71, 87, 0.5);
-            transition: 0.3s ease;
-            width: 100%;
+            box-shadow: 0 0 10px #ff2b5b;
+            transition: 0.3s;
         }
 
-        .btn:active {
-            transform: scale(0.97);
+        .lock-card button:hover {
+            transform: scale(1.05);
+            background: #e0264f;
         }
 
-        /* Floating Balloons */
-        .balloon-container {
-            position: fixed;
+        /* Canvas & Final Text */
+        canvas {
+            position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            pointer-events: none;
-            overflow: hidden;
-            z-index: 2;
         }
 
-        .balloon {
+        #name-container {
             position: absolute;
-            bottom: -100px;
-            width: 35px;
-            height: 45px;
-            border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
-            animation: floatUp 6s linear infinite;
-        }
-
-        @keyframes floatUp {
-            0% { transform: translateY(0) rotate(0deg); opacity: 0.9; }
-            100% { transform: translateY(-110vh) rotate(20deg); opacity: 0; }
-        }
-
-        /* Photo & Screenshot Display */
-        .img-box {
-            width: 100%;
-            border-radius: 12px;
-            overflow: hidden;
-            margin-top: 10px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .img-box img {
-            width: 100%;
-            display: block;
-            border-radius: 12px;
-            object-fit: cover;
-        }
-
-        .gallery-container {
-            width: 100%;
-            height: 320px;
-            border-radius: 12px;
-            overflow: hidden;
-            position: relative;
-            margin-top: 10px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .slide {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: none;
-        }
-
-        .active-slide {
-            display: block;
-            animation: fadeIn 0.8s ease;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        .letter-text {
-            text-align: left;
-            background: rgba(0, 0, 0, 0.25);
-            padding: 15px;
-            border-radius: 12px;
-            border-left: 4px solid #ff4757;
-            margin-top: 10px;
-        }
-
-        #error-msg {
-            color: #ff6b81;
-            font-size: 13px;
-            margin-top: 10px;
-            display: none;
-        }
-
-        /* --- HEART BREAK & NAME ANIMATION STYLES --- */
-        #heart-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: #0b0c10;
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-            opacity: 1;
-            transition: opacity 1s ease;
-        }
-
-        .heart-box {
-            position: relative;
-            width: 180px;
-            height: 180px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            animation: popIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-        }
-
-        @keyframes popIn {
-            0% { transform: scale(0); opacity: 0; }
-            100% { transform: scale(1); opacity: 1; }
-        }
-
-        .heart-half {
-            position: absolute;
-            width: 90px;
-            height: 150px;
-            background: linear-gradient(135deg, #ff4757, #ff6b81);
-            filter: drop-shadow(0 0 15px rgba(255, 71, 87, 0.8));
-            transition: transform 1.2s cubic-bezier(0.25, 1, 0.5, 1), opacity 1.2s ease;
-        }
-
-        .heart-left {
-            left: 0;
-            border-radius: 90px 90px 0 0;
-            transform-origin: right bottom;
-            transform: rotate(-45deg);
-            clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
-        }
-
-        .heart-right {
-            right: 0;
-            border-radius: 90px 90px 0 0;
-            transform-origin: left bottom;
-            transform: rotate(45deg);
-            clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
-        }
-
-        /* Heart Beat Pulse Effect before breaking */
-        .pulse {
-            animation: heartPulse 0.8s infinite alternate ease-in-out;
-        }
-
-        @keyframes heartPulse {
-            from { transform: scale(1); }
-            to { transform: scale(1.12); }
-        }
-
-        /* Break Classes */
-        .break-left {
-            transform: rotate(-65deg) translate(-80px, -40px) !important;
-            opacity: 0 !important;
-        }
-
-        .break-right {
-            transform: rotate(65deg) translate(80px, -40px) !important;
-            opacity: 0 !important;
-        }
-
-        /* Name Reveal Styling */
-        .name-reveal {
-            position: absolute;
-            font-size: 38px;
-            font-weight: 800;
-            background: linear-gradient(45deg, #ff4757, #ffbe76, #ff7979);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
             opacity: 0;
-            transform: scale(0.3);
-            transition: transform 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 1s ease;
-            text-shadow: 0 0 20px rgba(255, 71, 87, 0.5);
-            white-space: nowrap;
+            pointer-events: none;
+            transition: opacity 2s ease-in-out;
+            z-index: 5;
         }
 
-        .name-show {
-            opacity: 1;
-            transform: scale(1.1);
+        #name-container h1 {
+            color: #ff2b5b;
+            font-size: 4rem;
+            text-shadow: 0 0 20px #ff2b5b, 0 0 40px #ff2b5b;
+            margin-bottom: 10px;
+        }
+
+        #name-container p {
+            color: #fff;
+            font-size: 1.8rem;
+            text-shadow: 0 0 10px #fff;
         }
     </style>
 </head>
 <body>
 
-    <!-- Fairy Lights Header -->
-    <div class="fairy-lights" id="fairyLights">
-        <div class="light-bulb"></div>
-        <div class="light-bulb"></div>
-        <div class="light-bulb"></div>
-        <div class="light-bulb"></div>
-        <div class="light-bulb"></div>
-    </div>
-
-    <!-- Floating Balloons Layer -->
-    <div class="balloon-container" id="balloonContainer"></div>
-
-    <!-- Heart Break & Name Overlay -->
-    <div id="heart-screen">
-        <div class="heart-box pulse" id="heartBox">
-            <div class="heart-half heart-left" id="heartLeft"></div>
-            <div class="heart-half heart-right" id="heartRight"></div>
-            <div class="name-reveal" id="nameReveal">Tamanna 💖</div>
+    <!-- Lock Screen -->
+    <div id="lock-screen">
+        <div class="lock-card">
+            <h2>🔒 Surprise Waiting...</h2>
+            <input type="password" id="pass-input" placeholder="Enter Password (1234)">
+            <br>
+            <button onclick="unlock()">Unlock</button>
         </div>
     </div>
 
-    <!-- Background Music -->
-    <audio id="bgMusic" loop>
-        <source src="song.mp3" type="audio/mp3">
-    </audio>
+    <!-- Heart Animation Canvas -->
+    <canvas id="pinkboard"></canvas>
 
-    <div class="wrapper">
-
-        <!-- STEP 0: Lock Screen -->
-        <div class="card" id="step-lock">
-            <h2>🔒 Secret Lock</h2>
-            <p>Password dalo tabhi aage ka surprise dikhega 🤫</p>
-            <input type="password" id="passwordInput" placeholder="Enter Password...">
-            <button class="btn" onclick="checkPassword()">Unlock ✨</button>
-            <p id="error-msg">Galat password! Dobara try karo 😜</p>
-        </div>
-
-        <!-- Main Scrollable Content Area -->
-        <div id="main-content" style="display: none; flex-direction: column; gap: 20px;">
-
-            <!-- Ambient Controls -->
-            <div class="card">
-                <h2>The Stage is Set ✨</h2>
-                <p style="margin-bottom: 12px;">Pehle lights aur music on kar lo!</p>
-                <button class="btn" id="lightBtn" onclick="turnOnLights()" style="margin-bottom: 10px;">💡 TURN ON LIGHTS</button>
-                <button class="btn" id="musicBtn" onclick="toggleMusic()" style="background: #2ed573;">🎵 PLAY MUSIC</button>
-            </div>
-
-            <!-- First Conversation Section -->
-            <div class="card">
-                <h2>Where It All Started 💬</h2>
-                <p>Mujhe aaj bhi yaad hai jab tumse pehli baar baat hui thi... ❤️</p>
-                <!-- First Chat Screenshot Image -->
-                <div class="img-box">
-                    <img src="chat.jpg" alt="Pehli Baat Ka Screenshot">
-                </div>
-            </div>
-
-            <!-- Photos Section (2 Photos Only) -->
-            <div class="card">
-                <h2>Our Memories 📸</h2>
-                <div class="gallery-container">
-                    <img class="slide active-slide" src="1.jpg" alt="Photo 1">
-                    <img class="slide" src="2.jpg" alt="Photo 2">
-                </div>
-            </div>
-
-            <!-- Birthday Letter Section -->
-            <div class="card">
-                <h3>Pyaar Bhara Letter 💌</h3>
-                <div class="letter-text">
-                    <p>
-                        Happy Birthday, Gadhii! 🌸🥳<br><br>
-                        Today is a very special day because it is your birthday. Always stay happy, keep smiling, and may all your dreams come true. ❤️<br><br>
-                        You are one of those people with whom talking makes my heart feel lighter. Every moment spent with you is special. And yes, you are one of those people whom I can call even at 2 AM. 😄<br><br>
-                        Whenever you need anything, just message or call me without thinking twice.<br><br>
-                        Waise meri English bhi itni buri nahi hai... thodi bahut mujhe bhi aati hai. 🥰😎<br><br>
-                        Aur haan... itna bhi khush mat ho jana, thodi jhoothi tareef bhi ki hai. 😌😂<br><br>
-                        Happy Birthday once again, Gadhii! 💞🎀
-                    </p>
-                </div>
-            </div>
-
-        </div>
-
+    <!-- Final Wish Message -->
+    <div id="name-container">
+        <h1>Tamanna ❤️</h1>
+        <p>Happy Birthday!</p>
     </div>
 
     <script>
-        // Audio Crop Settings (1:13 = 73 seconds, 1:29 = 89 seconds)
-        const startTime = 73; 
-        const endTime = 89;   
-
-        const music = document.getElementById('bgMusic');
-
-        music.addEventListener('timeupdate', function() {
-            if (this.currentTime >= endTime) {
-                this.currentTime = startTime; 
-            }
-        });
-
-        // Password Check & Heart Animation Flow
-        function checkPassword() {
-            const password = document.getElementById('passwordInput').value;
-            if (password === "Oyee..") {
-                // Hide Lock Screen
-                document.getElementById('step-lock').style.display = "none";
-
-                // Show Heart Overlay Screen
-                const heartScreen = document.getElementById('heart-screen');
-                heartScreen.style.display = "flex";
-
-                // Animation Timeline
+        /* Lock logic */
+        function unlock() {
+            const pass = document.getElementById('pass-input').value;
+            // Password aap apni pasand ka rakh sakte ho (abhi '1234' hai)
+            if (pass === '1234' || pass === 'tamanna') {
+                const lockScreen = document.getElementById('lock-screen');
+                lockScreen.style.opacity = '0';
                 setTimeout(() => {
-                    // Remove pulse & break heart halves apart
-                    document.getElementById('heartBox').classList.remove('pulse');
-                    document.getElementById('heartLeft').classList.add('break-left');
-                    document.getElementById('heartRight').classList.add('break-right');
-
-                    // Reveal Name "Tamanna"
-                    setTimeout(() => {
-                        document.getElementById('nameReveal').classList.add('name-show');
-                    }, 400);
-
-                }, 1500); // Heart holds for 1.5s before breaking
-
-                // Smooth Fade Out of Animation Screen and reveal main content
-                setTimeout(() => {
-                    heartScreen.style.opacity = "0";
-                    setTimeout(() => {
-                        heartScreen.style.display = "none";
-                        document.getElementById('main-content').style.display = "flex";
-                        createBalloons();
-                        startPhotoSlider();
-                    }, 1000);
-                }, 4000);
-
+                    lockScreen.style.display = 'none';
+                    startAnimation();
+                }, 1000);
             } else {
-                document.getElementById('error-msg').style.display = "block";
+                alert('Wrong Password! Try again.');
             }
         }
 
-        // Lights Toggle
-        function turnOnLights() {
-            document.getElementById('fairyLights').style.opacity = "1";
-            document.body.style.background = "radial-gradient(circle, #1a1a2e 0%, #0f0f1a 100%)";
-            document.getElementById('lightBtn').innerText = "💡 LIGHTS ON!";
-        }
+        /* Particle Heart Animation Logic */
+        function startAnimation() {
+            var settings = {
+                particles: {
+                    length: 2000,
+                    duration: 2,
+                    velocity: 100,
+                    effect: -0.75,
+                    size: 13,
+                },
+            };
 
-        // Music Play/Pause Toggle
-        function toggleMusic() {
-            let btn = document.getElementById('musicBtn');
-            if (music.paused) {
-                if (music.currentTime < startTime || music.currentTime >= endTime) {
-                    music.currentTime = startTime;
+            (function () {
+                var b = 0; var c = ["ms", "moz", "webkit", "o"];
+                for (var a = 0; a < c.length && !window.requestAnimationFrame; ++a) {
+                    window.requestAnimationFrame = window[c[a] + "RequestAnimationFrame"];
+                    window.cancelAnimationFrame = window[c[a] + "CancelAnimationFrame"] || window[c[a] + "CancelRequestAnimationFrame"];
                 }
-                music.play();
-                btn.innerText = "⏸️ PAUSE MUSIC";
-            } else {
-                music.pause();
-                btn.innerText = "🎵 PLAY MUSIC";
-            }
-        }
+                if (!window.requestAnimationFrame) {
+                    window.requestAnimationFrame = function (h, e) {
+                        var d = new Date().getTime();
+                        var f = Math.max(0, 16 - (d - b));
+                        var g = window.setTimeout(function () { h(d + f); }, f);
+                        b = d + f;
+                        return g;
+                    };
+                }
+                if (!window.cancelAnimationFrame) {
+                    window.cancelAnimationFrame = function (d) { clearTimeout(d); };
+                }
+            })();
 
-        // Floating Balloons Generator
-        function createBalloons() {
-            const container = document.getElementById('balloonContainer');
-            const colors = ['#ff4757', '#74b9ff', '#ffeaa7', '#a29bfe', '#fd79a8'];
-            
-            for (let i = 0; i < 20; i++) {
-                let balloon = document.createElement('div');
-                balloon.className = 'balloon';
-                balloon.style.left = Math.random() * 100 + 'vw';
-                balloon.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-                balloon.style.animationDuration = (Math.random() * 3 + 4) + 's';
-                balloon.style.animationDelay = (Math.random() * 2) + 's';
-                container.appendChild(balloon);
-            }
-        }
+            var Point = (function () {
+                function Point(x, y) {
+                    this.x = (typeof x !== 'undefined') ? x : 0;
+                    this.y = (typeof y !== 'undefined') ? y : 0;
+                }
+                Point.prototype.clone = function () { return new Point(this.x, this.y); };
+                Point.prototype.length = function (length) {
+                    if (typeof length == 'undefined')
+                        return Math.sqrt(this.x * this.x + this.y * this.y);
+                    this.normalize();
+                    this.x *= length;
+                    this.y *= length;
+                    return this;
+                };
+                Point.prototype.normalize = function () {
+                    var length = this.length();
+                    this.x /= length;
+                    this.y /= length;
+                    return this;
+                };
+                return Point;
+            })();
 
-        // Photo Slider (2 Photos)
-        function startPhotoSlider() {
-            let slides = document.querySelectorAll('.slide');
-            let currentSlide = 0;
+            var Particle = (function () {
+                function Particle() {
+                    this.position = new Point();
+                    this.velocity = new Point();
+                    this.acceleration = new Point();
+                    this.age = 0;
+                }
+                Particle.prototype.initialize = function (x, y, dx, dy) {
+                    this.position.x = x;
+                    this.position.y = y;
+                    this.velocity.x = dx;
+                    this.velocity.y = dy;
+                    this.acceleration.x = dx * settings.particles.effect;
+                    this.acceleration.y = dy * settings.particles.effect;
+                    this.age = 0;
+                };
+                Particle.prototype.update = function (deltaTime) {
+                    this.position.x += this.velocity.x * deltaTime;
+                    this.position.y += this.velocity.y * deltaTime;
+                    this.velocity.x += this.acceleration.x * deltaTime;
+                    this.velocity.y += this.acceleration.y * deltaTime;
+                    this.age += deltaTime;
+                };
+                Particle.prototype.draw = function (context, image) {
+                    function ease(t) { return (--t) * t * t + 1; }
+                    var size = image.widthAah, yeh toh popular HTML5 **Canvas Particle Heart Animation** hai! Isme chhote-chhote glowing particles milkar ek glowing heart banate hain aur wo pulsating (dhaddakne wala) effect dete hain. Yeh visual sach me bohot aesthetic aur impressive lagta hai.
 
-            setInterval(() => {
-                slides[currentSlide].classList.remove('active-slide');
-                currentSlide = (currentSlide + 1) % slides.length;
-                slides[currentSlide].classList.add('active-slide');
-            }, 3000);
+Aise particle heart animation ko simple CSS animation ki jagah JavaScript **HTML5 Canvas** ke math-based parametric equations se render kiya jaata hai. 
+
+Maine ek complete code ready kar diya hai. Isme pehle particle heart dhadke ga, aur click karne par wo break hokar **"Tamanna"** naam me convert/reveal hoga.
+
+---
+
+### Complete Code (`index.html`)
+
+Aap ek single file banayein `index.html` naam se aur niche diya hua code usme paste kar dein:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>For Tamanna ❤️</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body, html {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background-color: #050505;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
+    #name-container {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0.8);
+      z-index: 2;
+      opacity: 0;
+      transition: all 1.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      pointer-events: none;
+      text-align: center;
+    }
+    #name-container.show {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+    h1 {
+      color: #ff3366;
+      font-size: 4rem;
+      text-shadow: 0 0 20px #ff3366, 0 0 40px #ff0044;
+      letter-spacing: 4px;
+    }
+    p {
+      color: #ffffff;
+      font-size: 1.2rem;
+      margin-top: 10px;
+      opacity: 0.8;
+      letter-spacing: 2px;
+    }
+    .hint {
+      position: absolute;
+      bottom: 30px;
+      width: 100%;
+      text-align: center;
+      color: rgba(255, 255, 255, 0.5);
+      font-size: 0.9rem;
+      z-index: 3;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+
+  <canvas id="heartCanvas"></canvas>
+
+  <div id="name-container">
+    <h1>Tamanna</h1>
+    <p>Happy Birthday! ✨</p>
+  </div>
+
+  <div class="hint">Tap anywhere on screen ❤️</div>
+
+  <script>
+    const canvas = document.getElementById('heartCanvas');
+    const ctx = canvas.getContext('2d');
+    const nameContainer = document.getElementById('name-container');
+
+    let width = canvas.width = window.innerWidth;
+    let height = canvas.height = window.innerHeight;
+
+    window.addEventListener('resize', () => {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    });
+
+    // Particle logic
+    const particles = [];
+    const particleCount = 600;
+    let isBroken = false;
+
+    // Heart formula
+    function heartPosition(t) {
+      const x = 16 * Math.pow(Math.sin(t), 3);
+      const y = -(13 * Math.cos(t) - 5 * Math.cos(2*t) - 2 * Math.cos(3*t) - Math.cos(4*t));
+      return { x, y };
+    }
+
+    class Particle {
+      constructor() {
+        this.t = Math.random() * Math.PI * 2;
+        const pos = heartPosition(this.t);
+        
+        // Scale factor for responsiveness
+        const scale = Math.min(width, height) / 45;
+        this.baseX = width / 2 + pos.x * scale;
+        this.baseY = height / 2 + pos.y * scale;
+        
+        this.x = this.baseX;
+        this.y = this.baseY;
+        
+        this.vx = (Math.random() - 0.5) * 2;
+        this.vy = (Math.random() - 0.5) * 2;
+        
+        this.size = Math.random() * 2.5 + 1;
+        this.color = `rgba(255, ${Math.floor(Math.random() * 80)}, ${Math.floor(Math.random() * 120 + 80)}, ${Math.random() * 0.7 + 0.3})`;
+        
+        // Pulse offset
+        this.pulseSpeed = Math.random() * 0.05 + 0.02;
+      }
+
+      update(time) {
+        if (!isBroken) {
+          // Heart heartbeat effect
+          const scale = 1 + Math.sin(time * 3) * 0.05;
+          const pos = heartPosition(this.t);
+          const currentScale = (Math.min(width, height) / 45) * scale;
+          
+          this.x = width / 2 + pos.x * currentScale + (Math.random() - 0.5) * 4;
+          this.y = height / 2 + pos.y * currentScale + (Math.random() - 0.5) * 4;
+        } else {
+          // Break/explosion effect
+          this.x += this.vx * 4;
+          this.y += this.vy * 4;
+          this.size *= 0.98; // Gradual fade out
         }
-    </script>
+      }
+
+      draw() {
+        ctx.fillStyle = this.color;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+
+    // Initialize particles
+    for (let i = 0; i < particleCount; i++) {
+      particles.push(new Particle());
+    }
+
+    let startTime = Date.now();
+
+    function animate() {
+      // Trail effect
+      ctx.fillStyle = 'rgba(5, 5, 5, 0.2)';
+      ctx.fillRect(0, 0, width, height);
+
+      const time = (Date.now() - startTime) / 1000;
+
+      particles.forEach(p => {
+        p.update(time);
+        p.draw();
+      });
+
+      requestAnimationFrame(animate);
+    }
+
+    animate();
+
+    // Trigger animation on click/tap
+    window.addEventListener('click', () => {
+      if (!isBroken) {
+        isBroken = true;
+        nameContainer.classList.add('show');
+        document.querySelector('.hint').style.display = 'none';
+      }
+    });
+  </script>
 </body>
 </html>
