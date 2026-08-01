@@ -201,6 +201,103 @@
             margin-top: 10px;
             display: none;
         }
+
+        /* --- HEART BREAK & NAME ANIMATION STYLES --- */
+        #heart-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: #0b0c10;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 1;
+            transition: opacity 1s ease;
+        }
+
+        .heart-box {
+            position: relative;
+            width: 180px;
+            height: 180px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: popIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        @keyframes popIn {
+            0% { transform: scale(0); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .heart-half {
+            position: absolute;
+            width: 90px;
+            height: 150px;
+            background: linear-gradient(135deg, #ff4757, #ff6b81);
+            filter: drop-shadow(0 0 15px rgba(255, 71, 87, 0.8));
+            transition: transform 1.2s cubic-bezier(0.25, 1, 0.5, 1), opacity 1.2s ease;
+        }
+
+        .heart-left {
+            left: 0;
+            border-radius: 90px 90px 0 0;
+            transform-origin: right bottom;
+            transform: rotate(-45deg);
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+        }
+
+        .heart-right {
+            right: 0;
+            border-radius: 90px 90px 0 0;
+            transform-origin: left bottom;
+            transform: rotate(45deg);
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+        }
+
+        /* Heart Beat Pulse Effect before breaking */
+        .pulse {
+            animation: heartPulse 0.8s infinite alternate ease-in-out;
+        }
+
+        @keyframes heartPulse {
+            from { transform: scale(1); }
+            to { transform: scale(1.12); }
+        }
+
+        /* Break Classes */
+        .break-left {
+            transform: rotate(-65deg) translate(-80px, -40px) !important;
+            opacity: 0 !important;
+        }
+
+        .break-right {
+            transform: rotate(65deg) translate(80px, -40px) !important;
+            opacity: 0 !important;
+        }
+
+        /* Name Reveal Styling */
+        .name-reveal {
+            position: absolute;
+            font-size: 38px;
+            font-weight: 800;
+            background: linear-gradient(45deg, #ff4757, #ffbe76, #ff7979);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            opacity: 0;
+            transform: scale(0.3);
+            transition: transform 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 1s ease;
+            text-shadow: 0 0 20px rgba(255, 71, 87, 0.5);
+            white-space: nowrap;
+        }
+
+        .name-show {
+            opacity: 1;
+            transform: scale(1.1);
+        }
     </style>
 </head>
 <body>
@@ -216,6 +313,15 @@
 
     <!-- Floating Balloons Layer -->
     <div class="balloon-container" id="balloonContainer"></div>
+
+    <!-- Heart Break & Name Overlay -->
+    <div id="heart-screen">
+        <div class="heart-box pulse" id="heartBox">
+            <div class="heart-half heart-left" id="heartLeft"></div>
+            <div class="heart-half heart-right" id="heartRight"></div>
+            <div class="name-reveal" id="nameReveal">Tamanna 💖</div>
+        </div>
+    </div>
 
     <!-- Background Music -->
     <audio id="bgMusic" loop>
@@ -285,26 +391,53 @@
 
     <script>
         // Audio Crop Settings (1:13 = 73 seconds, 1:29 = 89 seconds)
-        const startTime = 73; // Start time in seconds
-        const endTime = 89;   // End time in seconds
+        const startTime = 73; 
+        const endTime = 89;   
 
         const music = document.getElementById('bgMusic');
 
-        // Continuous monitoring: Jab bhi song 1:29 (89s) tak pahunchega, waapas 1:13 (73s) par reset ho jayega
         music.addEventListener('timeupdate', function() {
             if (this.currentTime >= endTime) {
                 this.currentTime = startTime; 
             }
         });
 
-        // Password Check
+        // Password Check & Heart Animation Flow
         function checkPassword() {
             const password = document.getElementById('passwordInput').value;
             if (password === "Oyee..") {
+                // Hide Lock Screen
                 document.getElementById('step-lock').style.display = "none";
-                document.getElementById('main-content').style.display = "flex";
-                createBalloons();
-                startPhotoSlider();
+
+                // Show Heart Overlay Screen
+                const heartScreen = document.getElementById('heart-screen');
+                heartScreen.style.display = "flex";
+
+                // Animation Timeline
+                setTimeout(() => {
+                    // Remove pulse & break heart halves apart
+                    document.getElementById('heartBox').classList.remove('pulse');
+                    document.getElementById('heartLeft').classList.add('break-left');
+                    document.getElementById('heartRight').classList.add('break-right');
+
+                    // Reveal Name "Tamanna"
+                    setTimeout(() => {
+                        document.getElementById('nameReveal').classList.add('name-show');
+                    }, 400);
+
+                }, 1500); // Heart holds for 1.5s before breaking
+
+                // Smooth Fade Out of Animation Screen and reveal main content
+                setTimeout(() => {
+                    heartScreen.style.opacity = "0";
+                    setTimeout(() => {
+                        heartScreen.style.display = "none";
+                        document.getElementById('main-content').style.display = "flex";
+                        createBalloons();
+                        startPhotoSlider();
+                    }, 1000);
+                }, 4000);
+
             } else {
                 document.getElementById('error-msg').style.display = "block";
             }
@@ -321,7 +454,6 @@
         function toggleMusic() {
             let btn = document.getElementById('musicBtn');
             if (music.paused) {
-                // Agar song selected timing range ke bahar hai, toh use 1:13 par set kar do
                 if (music.currentTime < startTime || music.currentTime >= endTime) {
                     music.currentTime = startTime;
                 }
